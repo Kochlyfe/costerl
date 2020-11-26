@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
-// import ApiService from './services/ApiService';
 import { registerUserRequest, loginUserRequest, getUserEntries, postEntryRequest } from './services/ApiService';
 import Home from './screens/home/Home';
 import Login from './screens/login/Login';
@@ -12,7 +10,6 @@ import Search from './screens/search/Search';
 import Analysis from './screens/analysis/Analysis';
 import Ui from './screens/ui/Ui';
 import Overview from './screens/overview/Overview';
-
 import { Alert } from 'react-native';
 import { Entry, User, UserInput } from './interfaces';
 
@@ -72,7 +69,6 @@ function App(): JSX.Element {
     <>
       <NavigationContainer>
         <Stack.Navigator>
-          {/* <Stack.Screen name="Home">{(props) => <Home {...props} resetUser={resetUser} />}</Stack.Screen> */}
           <Stack.Screen name="Home">{(props) => <Home {...props} />}</Stack.Screen>
 
           <Stack.Screen name="Login">

@@ -1,7 +1,21 @@
 import React from 'react';
-import { Text, Keyboard, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, Keyboard, TouchableOpacity, StyleSheet} from 'react-native';
 
-const ButtonApp = ({ id, cb, title }) => {
+interface Cb {
+  (
+  e?: Event,
+  title? : string,
+  id?: number,
+  ) : void;
+}
+
+interface Props {
+  id : number;
+  title : string;
+  cb : Cb;
+}
+
+const ButtonApp = ({ id, cb, title }: Props) : JSX.Element => {
   return (
     <TouchableOpacity
       style={styles.button}
@@ -14,10 +28,9 @@ const ButtonApp = ({ id, cb, title }) => {
             Keyboard.dismiss();
           }
         } else {
-          cb(id);
-        }
+            cb(id);
+          }
       }}
-      title={title}
     >
       <Text style={styles.buttonText}>{title}</Text>
     </TouchableOpacity>
@@ -30,7 +43,6 @@ const styles = StyleSheet.create({
   button: {
     height: 40,
     backgroundColor: '#2aa198',
-    // borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 5,
