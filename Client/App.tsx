@@ -3,7 +3,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // import ApiService from './services/ApiService';
-import { registerUserRequest, loginUserRequest, getUserEntries, postEntryRequest } from './services/ApiService';
+import {
+  registerUserRequest,
+  loginUserRequest,
+  getUserEntries,
+  postEntryRequest,
+  deleteEntryRequest,
+} from './services/ApiService';
 import Home from './screens/home/Home';
 import Login from './screens/login/Login';
 import Form from './screens/form/Form';
@@ -63,8 +69,9 @@ function App(): JSX.Element {
     }
   };
 
-  const deleteOne = (id: number): void => {
-    console.log(id);
+  const deleteEntry = async (id: number): Promise<void> => {
+    const res = await deleteEntryRequest(id);
+    console.log('result in app --->', res);
     // return delHelper(ApiService.deleteOne, id, setUserEntries);
   };
 
@@ -88,17 +95,17 @@ function App(): JSX.Element {
           </Stack.Screen>
 
           <Stack.Screen name="Entries">
-            {(props) => <Entries {...props} deleteOne={deleteOne} userEntries={userEntries} />}
+            {(props) => <Entries {...props} deleteEntry={deleteEntry} userEntries={userEntries} />}
           </Stack.Screen>
 
           <Stack.Screen name="Search">
-            {(props) => <Search {...props} userEntries={userEntries} deleteOne={deleteOne} />}
+            {(props) => <Search {...props} userEntries={userEntries} deleteEntry={deleteEntry} />}
           </Stack.Screen>
 
           <Stack.Screen name="Analysis">{(props) => <Analysis {...props} userEntries={userEntries} />}</Stack.Screen>
 
           <Stack.Screen name="Overview">
-            {(props) => <Overview {...props} userEntries={userEntries} deleteOne={deleteOne} />}
+            {(props) => <Overview {...props} userEntries={userEntries} deleteEntry={deleteEntry} />}
           </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>

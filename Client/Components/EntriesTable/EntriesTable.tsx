@@ -3,23 +3,24 @@ import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 import { Entry } from '../../interfaces';
 
-interface DeleteOne {
+interface DeleteEntry {
   (id: number): void;
 }
 
 interface Props {
-  deleteOne: DeleteOne;
+  deleteEntry: DeleteEntry;
   userEntries: Entry[];
 }
 
-const EntriesTable = ({ userEntries, deleteOne }: Props): JSX.Element => {
+const EntriesTable = ({ userEntries, deleteEntry }: Props): JSX.Element => {
   const tableHead = ['id', 'item', 'category', 'amount', 'delete'];
 
   const element = (id: number): JSX.Element => (
     <TouchableOpacity
-      onPress={() => {
+      onPress={(e) => {
+        console.log('click event --->', e);
         Alert.alert(`The item has been deleted`);
-        deleteOne(id);
+        deleteEntry(id);
       }}
     >
       <View style={styles.btn}>
@@ -33,10 +34,9 @@ const EntriesTable = ({ userEntries, deleteOne }: Props): JSX.Element => {
       <Table borderStyle={{ borderColor: 'transparent' }}>
         <Row data={tableHead} style={styles.head} textStyle={styles.text} />
         {userEntries.map((entry: Entry, index: number) => {
-          console.log('entry', entry, 'index', index);
           return (
             <TableWrapper key={index} style={styles.row}>
-              {['id', 'item', 'category', 'amoount', 'delete'].map((cellData, cellIndex: number) => (
+              {['id', 'item', 'category', 'amount', 'delete'].map((cellData: string, cellIndex: number) => (
                 <Cell
                   key={cellIndex}
                   data={cellIndex === 4 ? element(cellIndex) : entry[cellData]}

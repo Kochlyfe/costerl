@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
 
-const TableC = ({ entries, deleteOne }) => {
+const TableC = ({ entries, deleteEntry }) => {
   const tableHead = ['CAT', '% TOT', '>', 'σ'];
 
   const itemExtractor = (arr, filter, subfilter) => {
@@ -153,7 +153,7 @@ const TableC = ({ entries, deleteOne }) => {
         <Row data={tableHead} style={styles.head} textStyle={styles.text} />
         {final.map((rowData, index) => (
           <TableWrapper key={index} style={styles.row}>
-            {rowData.map((cellData, cellIndex, cellRow, rowIndex) => (
+            {rowData.map((cellData, cellIndex) => (
               <Cell key={cellIndex} data={cellData} textStyle={styles.text} />
             ))}
           </TableWrapper>
@@ -165,7 +165,7 @@ const TableC = ({ entries, deleteOne }) => {
   return <>{Array.isArray(entries) ? tableRender() : <></>}</>;
 };
 
-const Overview = ({ userEntries, deleteOne }) => {
+const Overview = ({ userEntries, deleteEntry }) => {
   // console.log('userEntries-->', userEntries);
 
   return (
@@ -180,7 +180,7 @@ const Overview = ({ userEntries, deleteOne }) => {
             el.flag = true;
             return el;
           })}
-          deleteOne={deleteOne}
+          deleteEntry={deleteEntry}
         />
       </ScrollView>
     </View>

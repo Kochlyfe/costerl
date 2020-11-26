@@ -7,7 +7,7 @@ import config from '../../config';
 const { searchForm } = config;
 const { filterHelper, nullConverter } = config.helperFunctions;
 
-const Search = ({ deleteOne, userEntries }) => {
+const Search = ({ deleteEntry, userEntries }) => {
   const [search, setSearch] = useState({});
 
   const filterList = (e) => {
@@ -26,7 +26,7 @@ const Search = ({ deleteOne, userEntries }) => {
         </ScrollView>
       </View>
       <ScrollView>
-        <EntriesTable entries={search} deleteOne={deleteOne} />
+        <EntriesTable userEntries={search} deleteEntry={deleteEntry} />
       </ScrollView>
     </View>
   );

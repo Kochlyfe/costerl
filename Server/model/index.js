@@ -3,10 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
-// const config = require('../config');
-// const dotenv = require('dotenv');
 
-// const sequelize = new Sequelize(config.database, config.username, config.password, config.config);
 const sequelize = new Sequelize(process.env.DATABASE_URL);
 
 const db = {};

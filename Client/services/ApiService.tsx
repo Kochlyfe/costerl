@@ -4,8 +4,8 @@ import { User, Entry, UserInput } from '../interfaces';
 
 interface Options {
   method: string;
-  headers: { [key: string]: string };
-  body: string;
+  headers?: { [key: string]: string };
+  body?: string;
 }
 
 export const BASE_URL = 'http://10.197.0.223:3002';
@@ -20,11 +20,13 @@ export const postEntryRequest = (entry: Entry): Promise<Entry[]> => {
   });
 };
 
-// const deleteOne = (id: number) => {
-//   return fetcher(`entries/${id}`, {
-//     method: 'DELETE',
-//   });
-// };
+export const deleteEntryRequest = (id: number): Promise<any> => {
+  const res = fetcher(`entries/${id}`, {
+    method: 'DELETE',
+  });
+  console.log('Result in apiservice --->', res);
+  return res;
+};
 
 export const registerUserRequest = (user: UserInput): Promise<User[]> => {
   return fetcher('/register', {
